@@ -1,0 +1,428 @@
+:root {
+  --main-font: sans-serif;
+  --font-size: 16px;
+  --main-color: #f7df1e;
+  --second-color: #222;
+  --main-modal-color: rgba(247, 222, 30, 0.85);
+  --second-modal-color: rgba(34, 34, 34, 0.85);
+  --container-width: 1200px;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: var(--main-font);
+  font-size: var(--font-size);
+  scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+header {
+  z-index: 997;
+  position: sticky;
+  top: 0;
+  padding: 1rem;
+  background-color: var(--main-color);
+  color: var(--second-color);
+}
+
+header h1 {
+  margin: 0;
+  text-align: center;
+}
+
+.section {
+  border: thin solid red;
+  padding: 2rem;
+  padding-top: 4rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: var(--container-width);
+  min-height: 100vh;
+  text-align: center;
+}
+
+.panel {
+  position: fixed;
+  z-index: 998;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow-y: auto;
+  opacity: 0;
+  background-color: var(--second-modal-color);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  /*arriba a abajo*/
+  transform: translate(0, -100%);
+  /*anajo a arriba*/
+  transform: translate(0, 100%);
+  /*izquierda a derecha*/
+  transform: translate(-100%, 0%);
+  /*derecha a izquierda*/
+  transform: translate(100%, 0);
+}
+
+.panel.is-active {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.panel-btn {
+  position: fixed;
+  z-index: 999;
+  bottom: 1vh;
+  right: 1vh;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-color);
+}
+
+.menu {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+
+.menu a {
+  padding: 2rem;
+  width: inherit;
+  display: block;
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--main-color);
+  transition: all0.3s ease;
+}
+
+.menu a:hover {
+  font-weight: bold;
+  color: var(--second-color);
+  background-color: var(--main-modal-color);
+}
+
+.escena {
+  display: flex;
+  background-color: var(--second-color);
+  height: 400px;
+  width: auto;
+}
+
+.pelota {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background-color: var(--main-color);
+}
+
+.btn-inicio {
+  position: fixed;
+  z-index: 999;
+  top: 1vh;
+  left: 1vw;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: #555;
+  color: var(--second-color);
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.btn-inicio:hover {
+  background-color: var(--second-color);
+  color: var(--main-color);
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.btn-modo-oscuro {
+  position: fixed;
+  z-index: 999;
+  bottom: 1vh;
+  left: 1vw;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: var(--main-color);
+  color: var(--second-color);
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.oscuro {
+  background-color: var(--second-color);
+  color: var(--main-color);
+}
+
+.on-line {
+  margin: 0;
+  position: sticky;
+  z-index: 1000;
+  font-size: 1rem;
+  bottom: 0;
+  background-color: green;
+  text-align: center;
+}
+
+.off-line {
+  margin: 0;
+  position: sticky;
+  z-index: 1000;
+  font-size: 1rem;
+  bottom: 0;
+  background-color: red;
+  text-align: center;
+}
+
+.card {
+  transition: all 0.3s ease-out;
+  background-color: var(--second-color);
+  color: var(--main-color);
+}
+
+.card figcaption {
+  padding: 10px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.filtra {
+  opacity: 0;
+  visibility: hidden;
+  order: 1;
+}
+
+/**************Responsive Slider****************/
+.slider {
+  position: relative;
+  width: 80%;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.slider-container {
+  position: relative;
+  height: 400px;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease;
+  height: 100%;
+  width: 100%;
+}
+
+.slide img {
+  height: inherit;
+  width: inherit;
+  object-fit: cover;
+  object-position: 50% 0%;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+.slider-btn {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.slider a {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: thin solid black;
+  text-decoration: none;
+  background-color: #fff;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+.slider a:hover {
+  color: #4d4d4d;
+}
+
+/***************SCROLL SPY*****************/
+
+@media screen and (min-width: 1024px) {
+  body {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 4rem auto;
+    grid-template-areas:
+      "header header"
+      "main     panel";
+  }
+
+  main {
+    grid-area: main;
+    position: sticky;
+    top: 4rem;
+    opacity: 1;
+  }
+
+  header {
+    grid-area: header;
+  }
+
+  .panel {
+    grid-area: panel;
+    align-self: start;
+    position: sticky;
+    top: 4rem;
+    justify-content: flex-start;
+    background-color: var(--second-color);
+    opacity: 1;
+    overflow-y: auto;
+    transform: translate(0, 0);
+  }
+
+  .menu {
+    justify-content: start;
+
+    text-align: right;
+  }
+
+  .menu a {
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
+
+  .menu a:hover,
+  .menu a.active {
+    color: var(--second-color);
+    background-color: var(--main-color);
+  }
+
+  .panel-btn {
+    display: none;
+  }
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+}
+
+/****************VALIDACION DE FORMULARIO********************/
+
+.validar-form > * {
+  /**todos los elementos dentro del elemento que tiene la clase validar-form*/
+  margin: 1rem auto;
+  display: block;
+  padding: 0.5rem;
+  width: 80%;
+  font-size: 1rem;
+  resize: none;
+  font-family: sans-serif;
+}
+
+.validar-form input[type="submit"] {
+  width: 50%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.validar-form [required]:valid {
+  border: 2px solid green;
+}
+
+.validar-form [required]:invalid {
+  border: 2px solid red;
+}
+
+.form-error {
+  margin-top: -1rem;
+  font-size: 80%;
+  background-color: red;
+  color: #fff;
+  transition: all 800ms ease;
+}
+
+.form-error.is-active {
+  display: block;
+  /*******duracion 1s, se ejecuta 1 sola vez de manera normal con 0s de retardo, efecto de animacion ease-out y conservara los estilos con los que la animacion que termine***********/
+  animation: show-message 1s 1 normal 0s ease-out both;
+}
+
+.none {
+  display: none;
+}
+
+@keyframes show-message {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+/******************NARRADOR*****************/
+
+.narrador select,
+textarea {
+  display: block;
+  margin: 0.5rem auto;
+  width: 50%;
+  font-size: 0.8rem;
+  font-family: sans-serif;
+}
